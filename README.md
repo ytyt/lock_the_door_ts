@@ -1,3 +1,8 @@
+かぎをかけたかどうかを記録するだけ
+React(hooks) + TyepScriptのお勉強用
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
