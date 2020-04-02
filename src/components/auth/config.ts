@@ -20,9 +20,11 @@ export const db = firebase.firestore();
 type TContext = {
   userName: string;
   userId: string | null;
+  updateUserName: (name: string) => void;
 };
 
 export const FirebaseContext = React.createContext<TContext>({
   userName: "",
-  userId: null
+  userId: null,
+  updateUserName: (name: string) => {}
 });

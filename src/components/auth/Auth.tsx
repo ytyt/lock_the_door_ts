@@ -5,22 +5,23 @@ import SignIn from "./SignIn";
 
 const useFirebaseAuth = () => {
   const [initialized, setInitialized] = useState(false);
-  const [userName, setUserName] = useState("");
+  const [userName, updateUserName] = useState("");
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
+      console.log(user);
       setInitialized(true);
       setUserId(user ? user.uid : null);
-      setUserName(user ? user.displayName || "" : "");
+      updateUserName(user ? user.displayName || "" : "");
     });
   }, []);
 
-  return { initialized, userName, userId };
+  return { initialized, userName, userId, updateUserName };
 };
 
 export const FirebaseAuth: React.FC = ({ children }) => {
-  const { initialized, userName, userId } = useFirebaseAuth();
+  const { initialized, userName, userId, updateUserName } = useFirebaseAuth();
 
   if (!initialized) {
     return <Loading />;
@@ -29,7 +30,7 @@ export const FirebaseAuth: React.FC = ({ children }) => {
   } else {
     return (
       <FirebaseContext.Provider
-        value={{ userId, userName }}
+        value={{ userId, userName, updateUserName }}
         children={children}
       />
     );
